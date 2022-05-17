@@ -41,7 +41,7 @@ public class UI_LoginBtn : MonoBehaviour
             //실패하면 false return
         }
 
-        GameManager.SetUser(user);
+        GameManager.instance.SetUser(user);
         return loginSucceed;
     }
 }

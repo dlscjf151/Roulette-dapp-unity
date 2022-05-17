@@ -23,7 +23,7 @@ public class UI_GameResultUI : MonoBehaviour
 
         balanceChanged.text = _balanceChanged.ToString();
 
-        User user = GameManager.GetUser();
+        User user = GameManager.instance.GetUser();
         user.balance += _balanceChanged;
         Resultbalance.text = user.balance.ToString(); 
     }
