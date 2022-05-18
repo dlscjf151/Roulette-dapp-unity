@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     public void Bet(BettingTarget.eBettingType _bettingType)
     {
         // 블록체인한테 데이터 어떻게 얼마나 줄지 모르겠음
+        // 일단 쌓아두고, UI update
+
+        //float nowBet += 0.1;
+        //UI_ChipCount.UpdateCnt();
     }
 
     public void CloseBets()
