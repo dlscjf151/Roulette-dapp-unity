@@ -11,25 +11,15 @@ public class BettingTarget : MonoBehaviour
         BLACK
     }
 
-    public GameObject number = null;//후에 GameObject[]로 바꿔서 다중 베팅
-    private static GameManager gameManager;
-    private eBettingType bettingType = eBettingType.NONE;
+    public GameObject number = null;//후에 GameObject[]로 바꿔서 다중 베팅?
+    public eBettingType bettingType = eBettingType.NONE;
 
-    public void Start()
-    {
-        gameManager = GameManager.instance;
-    }
-
-    public void SetBettingType(eBettingType _bettingType)
-    {
-        bettingType = _bettingType;
-    }
-
+    public UI_Betting bettingUI;
     public void Run()
     {
-        Debug.Assert(number != null, "Assert : BettingTarget can't be [null] from : " + name);
-        Debug.Assert(bettingType!= eBettingType.NONE, "Assert : BettingTarget Type can't be [NONE] from : " + name);
-        gameManager.Bet(bettingType);
+        Debug.Assert(bettingType != eBettingType.NONE, "Assert : betting type was [NONE]");
+        bettingUI.Set(bettingType);
+        bettingUI.gameObject.SetActive(true);
     }
 
 }

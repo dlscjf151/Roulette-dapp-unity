@@ -6,13 +6,12 @@ using TMPro;
 public class UI_GameResultUI : MonoBehaviour
 {
     public TMP_Text win_or_lose;
-    public TMP_Text balanceChanged;
-    public TMP_Text Resultbalance;
+    public TMP_Text beforeEth;
+    public TMP_Text afterEth;
 
-
-    public void ResultSetting(float _balanceChanged)
+    public void ResultSettingBy(float _balanceChanged)
     {
-        if(_balanceChanged>0)
+        if (_balanceChanged > 0)
         {
             win_or_lose.text = "WIN";
         }
@@ -21,10 +20,9 @@ public class UI_GameResultUI : MonoBehaviour
             win_or_lose.text = "LOSE";
         }
 
-        balanceChanged.text = _balanceChanged.ToString();
-
         User user = GameManager.instance.GetUser();
+        beforeEth.text = user.balance.ToString();
         user.balance += _balanceChanged;
-        Resultbalance.text = user.balance.ToString(); 
+        afterEth.text = user.balance.ToString();
     }
 }

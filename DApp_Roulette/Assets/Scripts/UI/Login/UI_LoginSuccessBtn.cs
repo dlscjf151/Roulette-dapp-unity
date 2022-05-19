@@ -5,9 +5,11 @@ using UnityEngine;
 public class UI_LoginSuccessBtn : MonoBehaviour
 {
     public GameObject loginUI;
+    public GameObject chipCnt;
     public void Run()
     {
         //원한다면 여기서 로그인 실패 메시지 바꿔줄 수 있음
+        chipCnt.SetActive(true);
         loginUI.SetActive(false);
     }
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance = null;
 
     #region Setting
     private GameManager() { }
-    private void Awake()
+    private void Start()
     {
-        if (instance != null)
+        if (instance == null)
         {
-            instance = new GameManager();
+            instance = this;
         }
     }
     private User user = new User("NONE", 0);
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Assert(user.name.Equals("NONE"), "Assert : [SetUser] already called, plz call this function only once ");
         user = _user;
+        chipCountUI.init();
     }
     public User GetUser()
     {
@@ -28,33 +29,62 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Betting System
-    public void Bet(BettingTarget.eBettingType _bettingType)
-    {
-        // 블록체인한테 데이터 어떻게 얼마나 줄지 모르겠음
-        // 일단 쌓아두고, UI update
 
-        //float nowBet += 0.1;
-        //UI_ChipCount.UpdateCnt();
+    public UI_ChipCount chipCountUI;
+    private BettingTarget.eBettingType bettingType;
+    private float bettingValue;
+    public void SetBetType(BettingTarget.eBettingType _bettingType)
+    {
+        bettingType = _bettingType;
     }
 
-    public void CloseBets()
+    public void Bet(float _bettingValue)
     {
-        //블록체인에 어디에 얼마 걸었는지 전송
-        //await하고 update 돌면서 데이터 들어오길 기다리는 쓰레드 생성 혹은 순수하게 기다리기
-        // 여기 설계 더 필요
+        //UI update 
+        bettingValue = _bettingValue;
+        // _bettingValue, bettingType을 블록체인으로 전송(how?)
+
+        gameState = eGameState.WAITING_GAME_RESULT;
     }
     #endregion
 
     public UI_GameResultUI gameResultUI;
-    public void WaitRouletteResult(bool win, float balanceChanged)
+    public void WaitRouletteResult(bool _win, float _balanceChanged)
     {//await? async?
         gameResultUI.gameObject.SetActive(true);
     }
 
-    private enum eGameState 
-    { 
-        BETTING,
-        WAITING
-    }
 
+    private enum eGameState { BETTING, WAITING_GAME_RESULT, REWARDING }
+    private eGameState gameState = eGameState.BETTING;
+    private void Update()
+    {
+        switch (gameState)
+        {
+            case eGameState.BETTING:
+                //베팅 가능한 상태
+                //그냥 Block UI가 작동 안하는 상태라고 생각하면 됨
+                //ClostBetting하면 Waiting state로 switch
+                break;
+            case eGameState.WAITING_GAME_RESULT:
+                //신호 올 때까지 룰렛 돌리고있기
+                // RotateRoulette();
+                // if (WaitSingal()) 신호 accept하면 Rewardig으로 switch
+                gameResultUI.ResultSettingBy(bettingValue);//블록체인에서 받은 값으로 세팅해야됨. 일단 그냥 세팅중
+                gameResultUI.gameObject.SetActive(true);
+                gameState = eGameState.REWARDING;
+                break;
+            case eGameState.REWARDING:
+                //리워드 받고 베팅상태로 switch하기
+                //리워드 창 말고 뭐 만지면 안됨 block UI 필요
+                // RewardUI.Close하면 베팅 상태로 switch
+                break;
+        }
+
+    }
+    public void SwitchGameStateToBetting()
+    {//칩 카운트 재조정, 칩 GameObject 치우기, 
+     //chipCountUI.UpdateCnt( ... ); 결과값 Update
+        gameState = eGameState.BETTING;
+    }
 }
