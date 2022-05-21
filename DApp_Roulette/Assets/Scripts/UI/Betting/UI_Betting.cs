@@ -9,9 +9,9 @@ public class UI_Betting : MonoBehaviour
     private const string BET_TO_RED = "Betting To [RED]";
     private const string BET_TO_BLACK = "Betting To [BLACK]";
 
-    public void Set(BettingTarget.eBettingType _bettingType)
+    public void Set(int _bettingType)
     {
-        if (_bettingType == BettingTarget.eBettingType.RED)
+        if (_bettingType == 0)
             bettingTarget.text = BET_TO_RED;
         else
             bettingTarget.text = BET_TO_BLACK;

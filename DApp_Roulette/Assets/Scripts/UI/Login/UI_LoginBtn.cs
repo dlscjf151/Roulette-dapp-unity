@@ -25,19 +25,19 @@ public class UI_LoginBtn : MonoBehaviour
 
     private bool TryLogIn()
     {
-        User user = new User("NONE", 0 );
+        User user = new User( -1 );
         bool loginSucceed = false;
 
+        //임시 계정 
         if (addressInputField.text == "0")
-        {//base 계정 로그인하기.
-            user = new User("Joon", 100);
+        {
+            user = new User(100);
             loginSucceed = true;
         }
-            
         
         if(true)
         {
-            //[DApp1] 블록체인에서 정보를 받아와야됨.
+            //[DApp1] metamask에서 정보를 받아와야됨.
             //실패하면 false return
         }
 

@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+    public UI_ChipCount chipCountUI;
+    public UI_GameResultUI gameResultUI;
+
+    private User user = new User(-1);
+    private int bettingType;
+    private float bettingValue;
 
     #region Setting
-    private GameManager() { }
+    private GameManager()
+    {
+        //null
+    }
+
     private void Start()
     {
         if (instance == null)
@@ -15,47 +26,42 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-    private User user = new User("NONE", 0);
+
     public void SetUser(User _user)
     {
-        Debug.Assert(user.name.Equals("NONE"), "Assert : [SetUser] already called, plz call this function only once ");
+        Debug.Assert(user.balance != -1, "Assert : Wrong balance : [" + user.balance + "] balance must bigger than -1");
         user = _user;
         chipCountUI.init();
     }
+
     public User GetUser()
     {
         return user;
     }
-    #endregion
+    #endregion Setting
+
 
     #region Betting System
-
-    public UI_ChipCount chipCountUI;
-    private BettingTarget.eBettingType bettingType;
-    private float bettingValue;
-    public void SetBetType(BettingTarget.eBettingType _bettingType)
+    public void SetBetType(int _bettingType)
     {
         bettingType = _bettingType;
     }
 
+    private int betResult = 0;
     public void Bet(float _bettingValue)
     {
-        //UI update 
         bettingValue = _bettingValue;
-        // _bettingValue, bettingType을 블록체인으로 전송(how?)
+
+        Thread thread = new Thread(async () => { //언젠가 join 되겠지 뭐...
+            betResult = await 자바스크립트함수(bettingType, bettingValue);
+        });
 
         gameState = eGameState.WAITING_GAME_RESULT;
     }
-    #endregion
-
-    public UI_GameResultUI gameResultUI;
-    public void WaitRouletteResult(bool _win, float _balanceChanged)
-    {//await? async?
-        gameResultUI.gameObject.SetActive(true);
-    }
+    #endregion Betting System
 
 
-    private enum eGameState { BETTING, WAITING_GAME_RESULT, REWARDING }
+    private enum eGameState { BETTING, WAITING_GAME_RESULT, RESULT }
     private eGameState gameState = eGameState.BETTING;
     private void Update()
     {
@@ -64,27 +70,31 @@ public class GameManager : MonoBehaviour
             case eGameState.BETTING:
                 //베팅 가능한 상태
                 //그냥 Block UI가 작동 안하는 상태라고 생각하면 됨
-                //ClostBetting하면 Waiting state로 switch
                 break;
             case eGameState.WAITING_GAME_RESULT:
-                //신호 올 때까지 룰렛 돌리고있기
-                // RotateRoulette();
-                // if (WaitSingal()) 신호 accept하면 Rewardig으로 switch
-                gameResultUI.ResultSettingBy(bettingValue);//블록체인에서 받은 값으로 세팅해야됨. 일단 그냥 세팅중
-                gameResultUI.gameObject.SetActive(true);
-                gameState = eGameState.REWARDING;
+                if (betResult != 0) // 0이 아니면 콜백 js 코드가 끝난것
+                {
+                    gameResultUI.ResultSettingBy(betResult);
+                    gameResultUI.gameObject.SetActive(true);
+                    gameState = eGameState.RESULT;
+                }
+                else
+                {
+                    // RotateRoulette();
+                }
                 break;
-            case eGameState.REWARDING:
+            case eGameState.RESULT:
                 //리워드 받고 베팅상태로 switch하기
-                //리워드 창 말고 뭐 만지면 안됨 block UI 필요
-                // RewardUI.Close하면 베팅 상태로 switch
                 break;
         }
-
     }
+
     public void SwitchGameStateToBetting()
-    {//칩 카운트 재조정, 칩 GameObject 치우기, 
-     //chipCountUI.UpdateCnt( ... ); 결과값 Update
+    { 
+        chipCountUI.UpdateCnt(betResult); //결과값 Update
+        bettingType = -1;
+        bettingValue = -1;
+        betResult = 0;
         gameState = eGameState.BETTING;
     }
 }

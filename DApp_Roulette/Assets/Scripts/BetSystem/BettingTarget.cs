@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class BettingTarget : MonoBehaviour
 {
-    public enum eBettingType
-    {
-        NONE,
-        RED,
-        BLACK
-    }
 
     public GameObject number = null;//후에 GameObject[]로 바꿔서 다중 베팅?
-    public eBettingType bettingType = eBettingType.NONE;
 
+    int bettingType = -1;
     public UI_Betting bettingUI;
     public void Run()
     {
-        Debug.Assert(bettingType != eBettingType.NONE, "Assert : betting type was [NONE]");
+        Debug.Assert(((bettingType == 0) || (bettingType ==1)), "Assert : betting type was [NONE]");
         bettingUI.Set(bettingType);
         bettingUI.gameObject.SetActive(true);
     }

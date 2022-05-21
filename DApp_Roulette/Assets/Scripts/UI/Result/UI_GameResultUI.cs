@@ -9,7 +9,7 @@ public class UI_GameResultUI : MonoBehaviour
     public TMP_Text beforeEth;
     public TMP_Text afterEth;
 
-    public void ResultSettingBy(float _balanceChanged)
+    public void ResultSettingBy(int _balanceChanged)
     {
         if (_balanceChanged > 0)
         {

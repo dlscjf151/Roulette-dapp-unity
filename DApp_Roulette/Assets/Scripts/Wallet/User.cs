@@ -1,12 +1,10 @@
 
 public struct User 
 {
-    public readonly string name;
-    public float balance;
+    public int balance;
 
-    public User(string _name, int _balance)
+    public User(int _balance)
     {
-        name = _name;
         balance = _balance;
     }
 }
