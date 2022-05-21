@@ -5,7 +5,6 @@ using TMPro;
 
 public class UI_LoginBtn : MonoBehaviour
 {
-    public TMP_InputField addressInputField;
     public GameObject loginFailUI;
     public GameObject loginSuccessUI;
     
@@ -27,17 +26,11 @@ public class UI_LoginBtn : MonoBehaviour
     {
         User user = new User( -1 );
         bool loginSucceed = false;
-
-        //임시 계정 
-        if (addressInputField.text == "0")
-        {
-            user = new User(100);
-            loginSucceed = true;
-        }
         
         if(true)
         {
-            //[DApp1] metamask에서 정보를 받아와야됨.
+            //[DApp1] metamask로 로그인
+            //awiat 사용해도 되고 안해도 됩니다
             //실패하면 false return
         }
 

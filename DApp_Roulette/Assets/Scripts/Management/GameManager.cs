@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         bettingValue = _bettingValue;
 
         Thread thread = new Thread(async () => { //언젠가 join 되겠지 뭐...
-            betResult = await 자바스크립트함수(bettingType, bettingValue);
+            //betResult = await 자바스크립트함수(bettingType, bettingValue);
         });
 
         gameState = eGameState.WAITING_GAME_RESULT;
