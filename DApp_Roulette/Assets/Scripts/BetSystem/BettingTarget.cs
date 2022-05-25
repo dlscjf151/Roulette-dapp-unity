@@ -5,12 +5,13 @@ using UnityEngine;
 public class BettingTarget : MonoBehaviour
 {
 
-    public GameObject number = null;//ÈÄ¿¡ GameObject[]·Î ¹Ù²ã¼­ ´ÙÁß º£ÆÃ?
+    public GameObject number = null;//ï¿½Ä¿ï¿½ GameObject[]ï¿½ï¿½ ï¿½Ù²ã¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?
 
     int bettingType = -1;
     public UI_Betting bettingUI;
     public void Run()
     {
+        Debug.Log(bettingType);
         Debug.Assert(((bettingType == 0) || (bettingType ==1)), "Assert : betting type was [NONE]");
         bettingUI.Set(bettingType);
         bettingUI.gameObject.SetActive(true);
