@@ -2,22 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Numerics;
+using System.Runtime.InteropServices;
+
 public class UI_ChipCount : MonoBehaviour
 {
     public TMP_Text chipCount;
-    private float eth = 0;
-    //Ä¨ ¸î°³±îÁö º¸¿©ÁÖÁö? ¸î ÀÌ´õ¿©¾ßµÇÁö?
-    //ÀÏ´Ü ÇÑ 10 ÀÌ´õ ¾´´Ù°í »ý°¢ÇÏ°í ÇÏÀÚ
+    private BigInteger eth = 0;
+    //Ä¨ ï¿½î°³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½?
+    //ï¿½Ï´ï¿½ ï¿½ï¿½ 10 ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern string fromWei(string wei);
+#endif
+    
     public void init()
     {
         eth = GameManager.instance.GetUser().balance;
+#if UNITY_WEBGL && !UNITY_EDITOR
+        string ether = fromWei(eth.ToString());
+        if (ether.Contains('.'))
+        {
+            int index = ether.IndexOf(".");
+            ether = ether.Substring(0, index+5);
+        }
+        chipCount.text = ether;
+#else
         chipCount.text = eth.ToString();
+#endif
     }
 
     public void UpdateCnt(float _bettingValue)
     {
-        eth += _bettingValue;
-        chipCount.text = "x"+eth;
+        // eth += _bettingValue;
+        // chipCount.text = "x"+eth;
     }
 }

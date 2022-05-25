@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using System.Numerics;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
     public UI_ChipCount chipCountUI;
     public UI_GameResultUI gameResultUI;
 
-    private User user = new User(-1);
+    private User user = new User(new BigInteger(0), "");
     private int bettingType;
     private float bettingValue;
 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void SetUser(User _user)
     {
-        Debug.Assert(user.balance != -1, "Assert : Wrong balance : [" + user.balance + "] balance must bigger than -1");
+        // Debug.Assert(user.balance != -1, "Assert : Wrong balance : [" + user.balance + "] balance must bigger than -1");
         user = _user;
         chipCountUI.init();
     }
@@ -52,8 +53,8 @@ public class GameManager : MonoBehaviour
     {
         bettingValue = _bettingValue;
 
-        Thread thread = new Thread(async () => { //¾ðÁ¨°¡ join µÇ°ÚÁö ¹¹...
-            //betResult = await ÀÚ¹Ù½ºÅ©¸³Æ®ÇÔ¼ö(bettingType, bettingValue);
+        Thread thread = new Thread(async () => { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ join ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½...
+            //betResult = await ï¿½Ú¹Ù½ï¿½Å©ï¿½ï¿½Æ®ï¿½Ô¼ï¿½(bettingType, bettingValue);
         });
 
         gameState = eGameState.WAITING_GAME_RESULT;
@@ -68,11 +69,11 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case eGameState.BETTING:
-                //º£ÆÃ °¡´ÉÇÑ »óÅÂ
-                //±×³É Block UI°¡ ÀÛµ¿ ¾ÈÇÏ´Â »óÅÂ¶ó°í »ý°¢ÇÏ¸é µÊ
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                //ï¿½×³ï¿½ Block UIï¿½ï¿½ ï¿½Ûµï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½
                 break;
             case eGameState.WAITING_GAME_RESULT:
-                if (betResult != 0) // 0ÀÌ ¾Æ´Ï¸é ÄÝ¹é js ÄÚµå°¡ ³¡³­°Í
+                if (betResult != 0) // 0ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½Ý¹ï¿½ js ï¿½Úµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 {
                     gameResultUI.ResultSettingBy(betResult);
                     gameResultUI.gameObject.SetActive(true);
@@ -84,14 +85,14 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case eGameState.RESULT:
-                //¸®¿öµå ¹Þ°í º£ÆÃ»óÅÂ·Î switchÇÏ±â
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ°ï¿½ ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Â·ï¿½ switchï¿½Ï±ï¿½
                 break;
         }
     }
 
     public void SwitchGameStateToBetting()
     { 
-        chipCountUI.UpdateCnt(betResult); //°á°ú°ª Update
+        chipCountUI.UpdateCnt(betResult); //ï¿½ï¿½ï¿½ï¿½ï¿½ Update
         bettingType = -1;
         bettingValue = -1;
         betResult = 0;

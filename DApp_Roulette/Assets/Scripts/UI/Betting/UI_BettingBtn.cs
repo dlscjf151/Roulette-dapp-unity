@@ -17,8 +17,8 @@ public class UI_BettingBtn : MonoBehaviour
     public void Bet()
     {
         float tryBetting = float.Parse(bettingValue.text);
-        if (tryBetting > 0.0f && user.balance > tryBetting)
-        {//¾È °É°Å³ª ÀÖ´Â°Åº¸´Ù ´õ ¸¹ÀÌ °É·Á°í ÇÏÁö ¾Ê´Â´Ù¸é
+        if (tryBetting > 0.0f /* && user.balance > tryBetting */)
+        {//ï¿½ï¿½ ï¿½É°Å³ï¿½ ï¿½Ö´Â°Åºï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½
             GameManager.instance.Bet(tryBetting);
             bettingUI.gameObject.SetActive(false);
         }
