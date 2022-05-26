@@ -9,6 +9,9 @@ public class UI_LoginBtn : MonoBehaviour
 {
     public GameObject loginFailUI;
     public GameObject loginSuccessUI;
+
+    public OnLogin onLogin;
+    public OnUser onUser;
     
 #if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
@@ -20,9 +23,8 @@ public class UI_LoginBtn : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         login();
 #else
-        User user = new User(new BigInteger(10), "");
-        GameManager.instance.SetUser(user);
-        loginSuccessUI.SetActive(true);
+        onLogin.OnLoginSuccess();
+        onUser.OnBalance("10");
 #endif
     }
 }

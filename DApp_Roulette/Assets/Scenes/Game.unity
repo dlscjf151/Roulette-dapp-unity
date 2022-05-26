@@ -1847,7 +1847,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 416389279}
         m_TargetAssemblyTypeName: BettingTarget, Assembly-CSharp
-        m_MethodName: Run
+        m_MethodName: BetBlack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2394,6 +2394,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginFailUI: {fileID: 321372544}
   loginSuccessUI: {fileID: 1553827847}
+  onLogin: {fileID: 1139306552}
+  onUser: {fileID: 1073887175}
 --- !u!114 &744747603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4070,7 +4072,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1046191474}
         m_TargetAssemblyTypeName: BettingTarget, Assembly-CSharp
-        m_MethodName: Run
+        m_MethodName: BetRed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4132,6 +4134,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   number: {fileID: 0}
   bettingUI: {fileID: 784859823}
+--- !u!1 &1073887173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073887174}
+  - component: {fileID: 1073887175}
+  - component: {fileID: 1073887176}
+  m_Layer: 0
+  m_Name: OnUser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073887174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073887173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1843980150}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073887175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073887173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a73560fa2cffca04f8bb87e99c4b4297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1073887176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073887173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f68009ff8736944bb9b2d95c797a809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipCountUI: {fileID: 2106558933}
+  gameResultUI: {fileID: 1399165022}
+  onBetResult: {fileID: 1163985847}
 --- !u!1 &1099570374
 GameObject:
   m_ObjectHideFlags: 0
@@ -4402,6 +4464,131 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118851943}
   m_CullTransparentMesh: 1
+--- !u!1 &1139306550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1139306551}
+  - component: {fileID: 1139306552}
+  - component: {fileID: 1139306553}
+  m_Layer: 0
+  m_Name: OnLogin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1139306551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139306550}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1843980150}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1139306552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139306550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f0536e23f21a24d89d586cdf5c4a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginFailUI: {fileID: 321372544}
+  loginSuccessUI: {fileID: 1553827847}
+--- !u!114 &1139306553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139306550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f68009ff8736944bb9b2d95c797a809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipCountUI: {fileID: 2106558933}
+  gameResultUI: {fileID: 1399165022}
+  onBetResult: {fileID: 1163985847}
+--- !u!1 &1163985845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1163985846}
+  - component: {fileID: 1163985847}
+  - component: {fileID: 1163985848}
+  m_Layer: 0
+  m_Name: OnBetResult
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1163985846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163985845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1843980150}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1163985847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163985845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96c514b0b8271640904767d5a93d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameResultUI: {fileID: 1399165022}
+  bettingUI: {fileID: 784859823}
+  bettingBtnUI: {fileID: 985258163}
+--- !u!114 &1163985848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163985845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f68009ff8736944bb9b2d95c797a809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipCountUI: {fileID: 2106558933}
+  gameResultUI: {fileID: 1399165022}
+  onBetResult: {fileID: 1163985847}
 --- !u!1 &1198817460
 GameObject:
   m_ObjectHideFlags: 0
@@ -4511,6 +4698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chipCountUI: {fileID: 2106558933}
   gameResultUI: {fileID: 1399165022}
+  onBetResult: {fileID: 1163985847}
 --- !u!4 &1208661888
 Transform:
   m_ObjectHideFlags: 0
@@ -5968,6 +6156,7 @@ GameObject:
   - component: {fileID: 1843980149}
   - component: {fileID: 1843980148}
   - component: {fileID: 1843980147}
+  - component: {fileID: 1843980151}
   m_Layer: 0
   m_Name: '[Listener]'
   m_TagString: Untagged
@@ -6015,6 +6204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chipCountUI: {fileID: 2106558933}
   gameResultUI: {fileID: 1399165022}
+  onBetResult: {fileID: 1843980151}
 --- !u!4 &1843980150
 Transform:
   m_ObjectHideFlags: 0
@@ -6026,10 +6216,28 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1163985846}
+  - {fileID: 1139306551}
+  - {fileID: 1073887174}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1843980151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843980146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96c514b0b8271640904767d5a93d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameResultUI: {fileID: 0}
+  bettingUI: {fileID: 0}
+  bettingBtnUI: {fileID: 0}
 --- !u!1 &1927820484
 GameObject:
   m_ObjectHideFlags: 0

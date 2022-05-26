@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Numerics;
+using System.Runtime.InteropServices;
 
 public class UI_GameResultUI : MonoBehaviour
 {
@@ -9,9 +11,15 @@ public class UI_GameResultUI : MonoBehaviour
     public TMP_Text beforeEth;
     public TMP_Text afterEth;
 
-    public void ResultSettingBy(int _balanceChanged)
+#if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern string fromWei(string wei);
+#endif
+
+    public void ResultSettingBy(string balance)
     {
-        if (_balanceChanged > 0)
+        User user = GameManager.instance.GetUser();
+        if (BigInteger.Parse(balance) > user.balance)
         {
             win_or_lose.text = "WIN";
         }
@@ -20,9 +28,29 @@ public class UI_GameResultUI : MonoBehaviour
             win_or_lose.text = "LOSE";
         }
 
-        User user = GameManager.instance.GetUser();
-        beforeEth.text = user.balance.ToString();
-        user.balance += _balanceChanged;
-        afterEth.text = user.balance.ToString();
+#if UNITY_WEBGL && !UNITY_EDITOR
+		string before = fromWei(user.balance.ToString());
+        if (before.Contains('.'))
+        {
+            int index = before.IndexOf(".");
+            before = before.Substring(0, index+5);
+        }
+#else
+		string before = user.balance.ToString();
+#endif
+
+        beforeEth.text = before;
+		
+#if UNITY_WEBGL && !UNITY_EDITOR
+		string after = fromWei(balance);
+        if (after.Contains('.'))
+        {
+            int index = before.IndexOf(".");
+            after = after.Substring(0, index+5);
+        }
+#else
+		string after = user.balance.ToString();
+#endif
+        afterEth.text = after;
     }
 }

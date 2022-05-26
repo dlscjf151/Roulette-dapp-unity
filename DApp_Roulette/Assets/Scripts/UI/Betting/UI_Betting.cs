@@ -11,7 +11,7 @@ public class UI_Betting : MonoBehaviour
 
     public void Set(int _bettingType)
     {
-        if (_bettingType == 0)
+        if (_bettingType == 1)
             bettingTarget.text = BET_TO_RED;
         else
             bettingTarget.text = BET_TO_BLACK;
