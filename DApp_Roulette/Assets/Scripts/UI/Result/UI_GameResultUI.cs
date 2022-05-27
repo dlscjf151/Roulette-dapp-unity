@@ -18,8 +18,9 @@ public class UI_GameResultUI : MonoBehaviour
 
     public void ResultSettingBy(string balance)
     {
+        Debug.Log(balance);
         User user = GameManager.instance.GetUser();
-        if (BigInteger.Parse(balance) > user.balance)
+        if (BigInteger.Parse(balance) >= user.balance)
         {
             win_or_lose.text = "WIN";
         }
@@ -51,7 +52,8 @@ public class UI_GameResultUI : MonoBehaviour
             after = after.Substring(0, index+5 > end ? end : index+5);
         }
 #else
-		string after = user.balance.ToString();
+		string after = balance.ToString();
+        
 #endif
         afterEth.text = after;
     }

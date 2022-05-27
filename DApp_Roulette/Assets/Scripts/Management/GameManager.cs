@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         bet(bettingValue.ToString(), bettingType);
 #else
 		onBetResult.OnBet();
-        onBetResult.OnResult((user.balance -1).ToString());
+        onBetResult.OnResult((user.balance - 1).ToString());
 #endif
         // update에서 상태를 확인하면서 결과를 기다리는 방식이 아닌
         // js 의 bet()를 호출하여 베팅을 진행하고 unity에서는 RotateRoulette을 호출해
