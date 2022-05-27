@@ -25,7 +25,8 @@ public class UI_ChipCount : MonoBehaviour
         if (ether.Contains('.'))
         {
             int index = ether.IndexOf(".");
-            ether = ether.Substring(0, index+5);
+            int end = ether.Length; 
+            ether = ether.Substring(0, index+5 > end ? end : index+5);
         }
         chipCount.text = ether;
 #else

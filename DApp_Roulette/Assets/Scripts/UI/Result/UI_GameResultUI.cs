@@ -33,7 +33,8 @@ public class UI_GameResultUI : MonoBehaviour
         if (before.Contains('.'))
         {
             int index = before.IndexOf(".");
-            before = before.Substring(0, index+5);
+            int end = before.Length; 
+            before = before.Substring(0, index+5 > end ? end : index+5);
         }
 #else
 		string before = user.balance.ToString();
@@ -46,7 +47,8 @@ public class UI_GameResultUI : MonoBehaviour
         if (after.Contains('.'))
         {
             int index = before.IndexOf(".");
-            after = after.Substring(0, index+5);
+            int end = after.Length; 
+            after = after.Substring(0, index+5 > end ? end : index+5);
         }
 #else
 		string after = user.balance.ToString();
